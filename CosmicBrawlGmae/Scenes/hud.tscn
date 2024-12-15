@@ -1,0 +1,173 @@
+[gd_scene load_steps=13 format=3 uid="uid://bd8l131oueilb"]
+
+[ext_resource type="Script" path="res://Scenes/hud.gd" id="1_m7snk"]
+[ext_resource type="Texture2D" uid="uid://dl4dtn5tawnw1" path="res://Sprites/HealthBarRight.png" id="1_nd7ba"]
+[ext_resource type="Texture2D" uid="uid://d0iyntxa40u0s" path="res://Sprites/HealthBarLeft.png" id="2_ikou1"]
+[ext_resource type="Texture2D" uid="uid://dmgjoeeglmj7b" path="res://Sprites/counter.png" id="4_td156"]
+[ext_resource type="Texture2D" uid="uid://cfnjr56m2q7xs" path="res://Sprites/PlayerProfile2.png" id="5_nex5c"]
+[ext_resource type="Texture2D" uid="uid://dljvsf81wrqdt" path="res://Sprites/idle_left.png" id="6_jf341"]
+[ext_resource type="Texture2D" uid="uid://bpogbwxjhsd5s" path="res://Sprites/PlayerProfile.png" id="7_w47w4"]
+[ext_resource type="Texture2D" uid="uid://b1qhs2keoqvis" path="res://Sprites/Player1Profile.png" id="8_43xjj"]
+[ext_resource type="Texture2D" uid="uid://cjywqis2ghut0" path="res://Sprites/idle_right.png" id="9_j5qcj"]
+[ext_resource type="Texture2D" uid="uid://diq0yo1cgrp6q" path="res://Sprites/Player1Profile2.png" id="10_dv335"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_mwlbd"]
+font_size = 45
+
+[sub_resource type="LabelSettings" id="LabelSettings_ul82u"]
+font_size = 64
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_m7snk")
+
+[node name="HealthBarRight" type="TextureProgressBar" parent="."]
+texture_filter = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 40.0
+offset_right = 440.0
+offset_bottom = 100.0
+grow_horizontal = 2
+max_value = 1.0
+value = 1.0
+nine_patch_stretch = true
+texture_under = ExtResource("1_nd7ba")
+texture_progress = ExtResource("1_nd7ba")
+tint_over = Color(1, 1, 1, 0)
+
+[node name="HealthBarLeft" type="TextureProgressBar" parent="."]
+texture_filter = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -440.0
+offset_right = -40.0
+offset_bottom = 100.0
+grow_horizontal = 2
+max_value = 1.0
+value = 1.0
+nine_patch_stretch = true
+texture_under = ExtResource("2_ikou1")
+texture_progress = ExtResource("2_ikou1")
+tint_over = Color(1, 1, 1, 0)
+
+[node name="Counter" type="TextureRect" parent="."]
+texture_filter = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -52.0
+offset_top = 10.0
+offset_right = 53.0
+offset_bottom = 110.0
+grow_horizontal = 2
+texture = ExtResource("4_td156")
+
+[node name="Player1Life" type="Label" parent="Counter"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 5.0
+offset_right = 45.0
+offset_bottom = 68.0
+text = "
+"
+label_settings = SubResource("LabelSettings_mwlbd")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Player2Life" type="Label" parent="Counter"]
+layout_mode = 0
+offset_left = 61.0
+offset_top = 5.0
+offset_right = 87.0
+offset_bottom = 68.0
+text = "
+"
+label_settings = SubResource("LabelSettings_mwlbd")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="P2Profile" type="TextureRect" parent="."]
+texture_filter = 1
+clip_contents = true
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 391.0
+offset_top = 20.0
+offset_right = 542.0
+offset_bottom = 100.0
+grow_horizontal = 2
+texture = ExtResource("5_nex5c")
+
+[node name="TextureRect" type="TextureRect" parent="P2Profile"]
+layout_mode = 0
+offset_left = 35.0
+offset_right = 148.0
+offset_bottom = 113.0
+texture = ExtResource("6_jf341")
+
+[node name="P2ProfileRim" type="TextureRect" parent="P2Profile/TextureRect"]
+z_index = 10
+texture_filter = 1
+clip_contents = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -91.5
+offset_right = 59.5
+offset_bottom = 80.0
+grow_horizontal = 2
+texture = ExtResource("7_w47w4")
+
+[node name="P1Profile" type="TextureRect" parent="."]
+texture_filter = 1
+clip_contents = true
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -542.0
+offset_top = 20.0
+offset_right = -391.0
+offset_bottom = 100.0
+grow_horizontal = 2
+texture = ExtResource("8_43xjj")
+
+[node name="TextureRect" type="TextureRect" parent="P1Profile"]
+layout_mode = 0
+offset_left = 3.0
+offset_right = 116.0
+offset_bottom = 113.0
+texture = ExtResource("9_j5qcj")
+
+[node name="P1ProfileRim" type="TextureRect" parent="P1Profile/TextureRect"]
+z_index = 10
+texture_filter = 1
+clip_contents = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -59.5
+offset_right = 91.5
+offset_bottom = 80.0
+grow_horizontal = 2
+texture = ExtResource("10_dv335")
+
+[node name="VictoryLog" type="Label" parent="."]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -149.0
+offset_top = 200.0
+offset_right = 151.0
+offset_bottom = 300.0
+grow_horizontal = 2
+text = "Victory"
+label_settings = SubResource("LabelSettings_ul82u")
+horizontal_alignment = 1
+vertical_alignment = 1

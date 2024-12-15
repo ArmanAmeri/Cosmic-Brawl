@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://ch72hhfmosoft"]
+
+[ext_resource type="Script" path="res://Scenes/follower_camera.gd" id="1_ln6s3"]
+
+[node name="FollowerCamera" type="Camera2D"]
+position_smoothing_speed = 3.0
+script = ExtResource("1_ln6s3")

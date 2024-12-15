@@ -1,0 +1,60 @@
+[gd_scene load_steps=7 format=3 uid="uid://blpth8f7tay40"]
+
+[ext_resource type="Script" path="res://Scenes/left_side.gd" id="1_73iva"]
+[ext_resource type="Script" path="res://Scenes/right_side.gd" id="2_irt73"]
+[ext_resource type="Script" path="res://Scenes/center.gd" id="3_uyo67"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_acsg1"]
+size = Vector2(150, 1000)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d3jc7"]
+size = Vector2(150, 1000)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fjvw5"]
+size = Vector2(250, 1000)
+
+[node name="Camera" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(4, 4)
+position_smoothing_enabled = true
+position_smoothing_speed = 3.0
+
+[node name="LeftSide" type="Area2D" parent="Camera2D"]
+position = Vector2(-200, 0)
+collision_layer = 8
+collision_mask = 10
+script = ExtResource("1_73iva")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/LeftSide"]
+shape = SubResource("RectangleShape2D_acsg1")
+
+[node name="RightSide" type="Area2D" parent="Camera2D"]
+position = Vector2(200, 0)
+collision_layer = 8
+collision_mask = 10
+script = ExtResource("2_irt73")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/RightSide"]
+shape = SubResource("RectangleShape2D_d3jc7")
+
+[node name="Center" type="Area2D" parent="Camera2D"]
+collision_layer = 8
+collision_mask = 10
+script = ExtResource("3_uyo67")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/Center"]
+shape = SubResource("RectangleShape2D_fjvw5")
+
+[connection signal="area_entered" from="Camera2D/LeftSide" to="Camera2D/LeftSide" method="_on_area_entered"]
+[connection signal="area_exited" from="Camera2D/LeftSide" to="Camera2D/LeftSide" method="_on_area_exited"]
+[connection signal="body_entered" from="Camera2D/LeftSide" to="Camera2D/LeftSide" method="_on_body_entered"]
+[connection signal="body_exited" from="Camera2D/LeftSide" to="Camera2D/LeftSide" method="_on_body_exited"]
+[connection signal="area_entered" from="Camera2D/RightSide" to="Camera2D/RightSide" method="_on_area_entered"]
+[connection signal="area_exited" from="Camera2D/RightSide" to="Camera2D/RightSide" method="_on_area_exited"]
+[connection signal="body_entered" from="Camera2D/RightSide" to="Camera2D/RightSide" method="_on_body_entered"]
+[connection signal="body_exited" from="Camera2D/RightSide" to="Camera2D/RightSide" method="_on_body_exited"]
+[connection signal="area_entered" from="Camera2D/Center" to="Camera2D/Center" method="_on_area_entered"]
+[connection signal="area_exited" from="Camera2D/Center" to="Camera2D/Center" method="_on_area_exited"]
+[connection signal="body_entered" from="Camera2D/Center" to="Camera2D/Center" method="_on_body_entered"]
+[connection signal="body_exited" from="Camera2D/Center" to="Camera2D/Center" method="_on_body_exited"]

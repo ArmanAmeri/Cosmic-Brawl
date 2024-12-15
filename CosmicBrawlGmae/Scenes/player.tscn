@@ -1,0 +1,355 @@
+[gd_scene load_steps=23 format=3 uid="uid://dofi1mmnxyrb1"]
+
+[ext_resource type="Script" path="res://Scenes/player.gd" id="1_f74ps"]
+[ext_resource type="Texture2D" uid="uid://cjywqis2ghut0" path="res://Sprites/idle_right.png" id="1_fqu5j"]
+[ext_resource type="Texture2D" uid="uid://b1wry3uy726sx" path="res://Sprites/dash.png" id="3_ulewp"]
+[ext_resource type="Texture2D" uid="uid://dljvsf81wrqdt" path="res://Sprites/idle_left.png" id="3_vldes"]
+[ext_resource type="Texture2D" uid="uid://bnlbikn55r6kc" path="res://Sprites/jump_left.png" id="4_2o5sp"]
+[ext_resource type="Texture2D" uid="uid://blg730hwibjwn" path="res://Sprites/jump_right.png" id="5_v01t7"]
+[ext_resource type="Texture2D" uid="uid://caf42h2gjxrqw" path="res://Sprites/run1_left.png" id="6_8fdlx"]
+[ext_resource type="Texture2D" uid="uid://drij08jj5ii2s" path="res://Sprites/run1_right.png" id="7_tdkkm"]
+[ext_resource type="Texture2D" uid="uid://w05guyx353y4" path="res://Sprites/run2_left.png" id="8_q2k3i"]
+[ext_resource type="Texture2D" uid="uid://d26t7p1bvgd5p" path="res://Sprites/run2_right.png" id="9_dr4vt"]
+[ext_resource type="Texture2D" uid="uid://f0gkl3sc4fcx" path="res://Sprites/healthbar.png" id="11_6pd73"]
+[ext_resource type="Texture2D" uid="uid://cao2skgsudb54" path="res://Sprites/ATTACK FREE/PunchImp1.png" id="11_wvbd8"]
+[ext_resource type="Texture2D" uid="uid://dfcgwf3kyonwn" path="res://Sprites/ATTACK FREE/BigSlashV.png" id="12_66n0m"]
+[ext_resource type="Texture2D" uid="uid://3w2tioyemslh" path="res://Sprites/Charge Orb.png" id="12_ffu1g"]
+[ext_resource type="Script" path="res://Scenes/AttackArea.gd" id="16_rrysi"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7ilr6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ulewp")
+}, {
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"dash",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_vldes")
+}],
+"loop": true,
+"name": &"idle_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_fqu5j")
+}],
+"loop": true,
+"name": &"idle_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_2o5sp")
+}],
+"loop": true,
+"name": &"jump_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_v01t7")
+}],
+"loop": true,
+"name": &"jump_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_8fdlx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_q2k3i")
+}],
+"loop": true,
+"name": &"run_left",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_tdkkm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_dr4vt")
+}],
+"loop": true,
+"name": &"run_right",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y1mtb"]
+radius = 5.0
+height = 14.0
+
+[sub_resource type="Animation" id="Animation_55jd8"]
+resource_name = "Heavy Attack"
+length = 0.4
+step = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AttackArea/heavyAttack:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.08, 0.16, 0.24, 0.32),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AttackArea/AttackColl:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.013, 0.241, 0.279),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, false, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_mvvwq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AttackArea/attack:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AttackArea/heavyAttack:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AttackArea/AttackColl:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_kg02q"]
+resource_name = "Slash"
+length = 0.4
+step = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AttackArea/attack:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.08, 0.16, 0.24, 0.32),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AttackArea/AttackColl:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.036, 0.268, 0.312),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, false, false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g0pyo"]
+_data = {
+"Heavy Attack": SubResource("Animation_55jd8"),
+"RESET": SubResource("Animation_mvvwq"),
+"Slash": SubResource("Animation_kg02q")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eyykm"]
+size = Vector2(14, 14)
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_f74ps")
+
+[node name="player_cardinalDirections" type="Node2D" parent="."]
+
+[node name="N" type="Marker2D" parent="player_cardinalDirections"]
+position = Vector2(0, -14.1)
+
+[node name="S" type="Marker2D" parent="player_cardinalDirections"]
+position = Vector2(0, 14.5)
+
+[node name="W" type="Marker2D" parent="player_cardinalDirections"]
+position = Vector2(-12.1, 0)
+
+[node name="E" type="Marker2D" parent="player_cardinalDirections"]
+position = Vector2(12.1, 0)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_7ilr6")
+animation = &"idle_right"
+
+[node name="PlayerColl" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("CapsuleShape2D_y1mtb")
+
+[node name="PlayerBack" type="Node2D" parent="."]
+z_index = 10
+position = Vector2(-9, 1)
+
+[node name="ChargeBar" type="TextureProgressBar" parent="PlayerBack"]
+texture_filter = 1
+offset_top = 7.0
+offset_right = 14.0
+offset_bottom = 10.0
+rotation = 4.71239
+nine_patch_stretch = true
+texture_under = ExtResource("11_6pd73")
+texture_over = ExtResource("11_6pd73")
+texture_progress = ExtResource("11_6pd73")
+tint_under = Color(0.45, 0.45, 0.45, 1)
+tint_over = Color(1, 1, 1, 0)
+tint_progress = Color(0.0370001, 0.74, 0, 1)
+
+[node name="ChargeOrb" type="TextureProgressBar" parent="PlayerBack"]
+z_index = -1
+texture_filter = 1
+offset_left = -10.0
+offset_top = -7.0
+offset_right = 4.0
+offset_bottom = 7.0
+max_value = 3.0
+fill_mode = 3
+nine_patch_stretch = true
+texture_under = ExtResource("12_ffu1g")
+texture_over = ExtResource("12_ffu1g")
+texture_progress = ExtResource("12_ffu1g")
+tint_under = Color(0.45098, 0.45098, 0.45098, 1)
+tint_over = Color(1, 1, 1, 0)
+tint_progress = Color(1, 1, 0.38, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="AttackCooldown" type="Timer" parent="Timers"]
+wait_time = 0.3
+
+[node name="DashCooldown" type="Timer" parent="Timers"]
+
+[node name="DashTimer" type="Timer" parent="Timers"]
+wait_time = 0.3
+
+[node name="AttackTimer" type="Timer" parent="Timers"]
+wait_time = 0.1
+
+[node name="HeavyCooldown" type="Timer" parent="Timers"]
+
+[node name="attackPause" type="Timer" parent="Timers"]
+wait_time = 0.4
+
+[node name="HeavyChargeTime" type="Timer" parent="Timers"]
+
+[node name="OrbCooldown" type="Timer" parent="Timers"]
+wait_time = 1.5
+
+[node name="HeavyBuff" type="Timer" parent="Timers"]
+wait_time = 10.0
+
+[node name="ChanceTimer" type="Timer" parent="Timers"]
+wait_time = 15.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_g0pyo")
+}
+
+[node name="AttackArea" type="Area2D" parent="."]
+position = Vector2(12.1, 0)
+collision_layer = 16
+collision_mask = 3
+script = ExtResource("16_rrysi")
+
+[node name="AttackColl" type="CollisionShape2D" parent="AttackArea"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_eyykm")
+
+[node name="heavyAttack" type="Sprite2D" parent="AttackArea"]
+visible = false
+z_index = 10
+texture_filter = 1
+position = Vector2(2, 1)
+scale = Vector2(0.541667, 0.541667)
+texture = ExtResource("12_66n0m")
+hframes = 5
+
+[node name="attack" type="Sprite2D" parent="AttackArea"]
+z_index = 10
+texture_filter = 1
+scale = Vector2(0.53125, 0.53125)
+texture = ExtResource("11_wvbd8")
+offset = Vector2(-6, -6)
+hframes = 5
+frame = 1
+
+[node name="HPBar" type="TextureProgressBar" parent="."]
+visible = false
+texture_filter = 1
+offset_left = -8.0
+offset_top = -12.0
+offset_right = 9.0
+offset_bottom = -9.0
+max_value = 1.0
+value = 1.0
+nine_patch_stretch = true
+texture_under = ExtResource("11_6pd73")
+texture_over = ExtResource("11_6pd73")
+texture_progress = ExtResource("11_6pd73")
+tint_under = Color(0.44, 0.44, 0.44, 1)
+tint_over = Color(1, 1, 1, 0)
+
+[connection signal="timeout" from="Timers/AttackCooldown" to="." method="_on_attack_cooldown_timeout"]
+[connection signal="timeout" from="Timers/DashCooldown" to="." method="_on_dash_cooldown_timeout"]
+[connection signal="timeout" from="Timers/DashTimer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="Timers/AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="Timers/HeavyCooldown" to="." method="_on_heavy_cooldown_timeout"]
+[connection signal="timeout" from="Timers/attackPause" to="." method="_on_attack_pause_timeout"]
+[connection signal="timeout" from="Timers/OrbCooldown" to="." method="_on_orb_cooldown_timeout"]
+[connection signal="timeout" from="Timers/HeavyBuff" to="." method="_on_heavy_buff_timeout"]
+[connection signal="timeout" from="Timers/ChanceTimer" to="." method="_on_chance_timer_timeout"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="body_entered" from="AttackArea" to="AttackArea" method="_on_body_entered"]

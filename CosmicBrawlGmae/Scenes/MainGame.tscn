@@ -1,0 +1,93 @@
+[gd_scene load_steps=14 format=4 uid="uid://c4505mq3dgexd"]
+
+[ext_resource type="Script" path="res://Scenes/main_game.gd" id="1_hku7k"]
+[ext_resource type="Texture2D" uid="uid://bhmx70cfc6n1s" path="res://Sprites/platform3.png" id="1_ongda"]
+[ext_resource type="PackedScene" uid="uid://dofi1mmnxyrb1" path="res://Scenes/player.tscn" id="2_cjrj1"]
+[ext_resource type="Texture2D" uid="uid://dfeo3ww32u7ft" path="res://Sprites/Space Background (1).png" id="2_yn84v"]
+[ext_resource type="PackedScene" uid="uid://ch72hhfmosoft" path="res://Scenes/follower_camera.tscn" id="5_y7cn8"]
+[ext_resource type="Script" path="res://Scenes/death_border.gd" id="6_gpt5m"]
+[ext_resource type="PackedScene" uid="uid://bd8l131oueilb" path="res://Scenes/hud.tscn" id="7_4tmkq"]
+[ext_resource type="PackedScene" uid="uid://xbooklx1logb" path="res://Scenes/spawner.tscn" id="9_wm3qt"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mwfjc"]
+texture = ExtResource("1_ongda")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_whri1"]
+physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 2
+sources/0 = SubResource("TileSetAtlasSource_mwfjc")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gvr6s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oqff6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q8n7b"]
+
+[node name="MainScene" type="Node2D"]
+script = ExtResource("1_hku7k")
+
+[node name="Background" type="TextureRect" parent="."]
+texture_filter = 1
+offset_left = -1083.0
+offset_top = -435.0
+offset_right = 1917.0
+offset_bottom = 565.0
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2_yn84v")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+texture_filter = 1
+tile_map_data = PackedByteArray("AAD0/wAAAAAAAAAAAAD0/wEAAAAAAAAAAAD0/wIAAAAAAAAAAAD1/wAAAAAAAAAAAAD1/wEAAAAAAAAAAAD1/wIAAAAAAAAAAAD2/wAAAAAAAAAAAAD2/wEAAAAAAAAAAAD2/wIAAAAAAAAAAAD3/wAAAAAAAAAAAAD3/wEAAAAAAAAAAAD3/wIAAAAAAAAAAAD4/wAAAAAAAAAAAAD4/wEAAAAAAAAAAAD4/wIAAAAAAAAAAAD5/wAAAAAAAAAAAAD5/wEAAAAAAAAAAAD5/wIAAAAAAAAAAAD6/wAAAAAAAAAAAAD6/wEAAAAAAAAAAAD6/wIAAAAAAAAAAAD7/wAAAAAAAAAAAAD7/wEAAAAAAAAAAAD7/wIAAAAAAAAAAAD8/wAAAAAAAAAAAAD8/wEAAAAAAAAAAAD8/wIAAAAAAAAAAAD9/wAAAAAAAAAAAAD9/wEAAAAAAAAAAAD9/wIAAAAAAAAAAAD+/wAAAAAAAAAAAAD+/wEAAAAAAAAAAAD+/wIAAAAAAAAAAAD//wAAAAAAAAAAAAD//wEAAAAAAAAAAAD//wIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAIAAAAAAAAAAAABAAAAAAAAAAAAAAABAAEAAAAAAAAAAAABAAIAAAAAAAAAAAACAAAAAAAAAAAAAAACAAEAAAAAAAAAAAACAAIAAAAAAAAAAAADAAAAAAAAAAAAAAADAAEAAAAAAAAAAAADAAIAAAAAAAAAAAAEAAAAAAAAAAAAAAAEAAEAAAAAAAAAAAAEAAIAAAAAAAAAAAAFAAAAAAAAAAAAAAAFAAEAAAAAAAAAAAAFAAIAAAAAAAAAAAAGAAAAAAAAAAAAAAAGAAEAAAAAAAAAAAAGAAIAAAAAAAAAAAAHAAAAAAAAAAAAAAAHAAEAAAAAAAAAAAAHAAIAAAAAAAAAAAAIAAAAAAAAAAAAAAAIAAEAAAAAAAAAAAAIAAIAAAAAAAAAAAAJAAAAAAAAAAAAAAAJAAEAAAAAAAAAAAAJAAIAAAAAAAAAAAAKAAAAAAAAAAAAAAAKAAEAAAAAAAAAAAAKAAIAAAAAAAAAAAALAAAAAAAAAAAAAAALAAEAAAAAAAAAAAALAAIAAAAAAAAAAADx//z/AAAAAAAAAADx//3/AAAAAAAAAADy//z/AAAAAAAAAADy//3/AAAAAAAAAADz//z/AAAAAAAAAADz//3/AAAAAAAAAAD0//z/AAAAAAAAAAD0//3/AAAAAAAAAAD1//z/AAAAAAAAAAD1//3/AAAAAAAAAAAKAPz/AAAAAAAAAAAKAP3/AAAAAAAAAAALAPz/AAAAAAAAAAALAP3/AAAAAAAAAAAMAPz/AAAAAAAAAAAMAP3/AAAAAAAAAAANAPz/AAAAAAAAAAANAP3/AAAAAAAAAAAOAPz/AAAAAAAAAAAOAP3/AAAAAAAAAAD7//v/AAAAAAAAAAD7//z/AAAAAAAAAAD8//v/AAAAAAAAAAD8//z/AAAAAAAAAAD9//v/AAAAAAAAAAD9//z/AAAAAAAAAAD+//v/AAAAAAAAAAD+//z/AAAAAAAAAAD///v/AAAAAAAAAAD///z/AAAAAAAAAAAAAPv/AAAAAAAAAAAAAPz/AAAAAAAAAAABAPv/AAAAAAAAAAABAPz/AAAAAAAAAAACAPv/AAAAAAAAAAACAPz/AAAAAAAAAAADAPv/AAAAAAAAAAADAPz/AAAAAAAAAAAEAPv/AAAAAAAAAAAEAPz/AAAAAAAAAAD2//j/AAAAAAAAAAD3//j/AAAAAAAAAAD4//j/AAAAAAAAAAAHAPj/AAAAAAAAAAAIAPj/AAAAAAAAAAAJAPj/AAAAAAAAAAABAPb/AAAAAAAAAAD+//b/AAAAAAAAAAD9//b/AAAAAAAAAAD8//b/AAAAAAAAAAACAPb/AAAAAAAAAAADAPb/AAAAAAAAAAA=")
+tile_set = SubResource("TileSet_whri1")
+
+[node name="Player" parent="." groups=["players"] instance=ExtResource("2_cjrj1")]
+position = Vector2(-129, -53)
+
+[node name="Player2" parent="." groups=["players"] instance=ExtResource("2_cjrj1")]
+position = Vector2(126, -53)
+player_id = 2
+
+[node name="FollowerCamera" parent="." instance=ExtResource("5_y7cn8")]
+
+[node name="DeathBorder" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16777215
+script = ExtResource("6_gpt5m")
+
+[node name="DBDown" type="CollisionShape2D" parent="DeathBorder"]
+position = Vector2(0, 400)
+scale = Vector2(100, 5)
+shape = SubResource("RectangleShape2D_gvr6s")
+
+[node name="DBUp" type="CollisionShape2D" parent="DeathBorder"]
+position = Vector2(0, -500)
+scale = Vector2(100, 5)
+shape = SubResource("RectangleShape2D_oqff6")
+
+[node name="DBRight" type="CollisionShape2D" parent="DeathBorder"]
+position = Vector2(1000, 0)
+rotation = 1.5708
+scale = Vector2(50, 5)
+shape = SubResource("RectangleShape2D_q8n7b")
+
+[node name="DBLeft" type="CollisionShape2D" parent="DeathBorder"]
+position = Vector2(-1000, 0)
+rotation = 1.5708
+scale = Vector2(50, 5)
+shape = SubResource("RectangleShape2D_q8n7b")
+
+[node name="HUD" parent="." instance=ExtResource("7_4tmkq")]
+
+[node name="Spawner" parent="." instance=ExtResource("9_wm3qt")]
+
+[node name="ItemGroup" type="Node2D" parent="."]
+
+[connection signal="counterChange" from="." to="HUD" method="_on_main_scene_counter_change"]
+[connection signal="victory" from="." to="HUD" method="_on_main_scene_victory"]
+[connection signal="playerDied" from="Player" to="." method="_on_player_player_died"]
+[connection signal="player_update_health" from="Player" to="HUD" method="_on_player_player_update_health"]
+[connection signal="playerDied" from="Player2" to="." method="_on_player_2_player_died"]
+[connection signal="player_update_health" from="Player2" to="HUD" method="_on_player_2_player_update_health"]
+[connection signal="body_entered" from="DeathBorder" to="DeathBorder" method="_on_body_entered"]

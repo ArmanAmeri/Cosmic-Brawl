@@ -1,0 +1,79 @@
+[gd_scene load_steps=8 format=3 uid="uid://bt166mlf56mso"]
+
+[ext_resource type="Script" path="res://dummy.gd" id="1_woda2"]
+[ext_resource type="Texture2D" uid="uid://dl2ec0br0ha5t" path="res://Sprites/FREE_Samurai 2D Pixel Art v1.2/Sprites/IDLE.png" id="2_woljw"]
+[ext_resource type="Texture2D" uid="uid://f0gkl3sc4fcx" path="res://Sprites/healthbar.png" id="3_i55gl"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m8v50"]
+radius = 7.0
+height = 34.0
+
+[sub_resource type="Animation" id="Animation_rl617"]
+resource_name = "idle"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("dummySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+
+[sub_resource type="Animation" id="Animation_1womi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("dummySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b11du"]
+_data = {
+"RESET": SubResource("Animation_1womi"),
+"idle": SubResource("Animation_rl617")
+}
+
+[node name="dummy" type="CharacterBody2D"]
+script = ExtResource("1_woda2")
+
+[node name="dummySprite" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -9)
+texture = ExtResource("2_woljw")
+hframes = 10
+
+[node name="CollisionDummy" type="CollisionShape2D" parent="."]
+position = Vector2(0, 7)
+shape = SubResource("CapsuleShape2D_m8v50")
+
+[node name="HPBar" type="TextureProgressBar" parent="."]
+texture_filter = 1
+offset_left = -17.0
+offset_top = -18.0
+offset_right = 17.0
+offset_bottom = -12.0
+value = 50.0
+nine_patch_stretch = true
+texture_under = ExtResource("3_i55gl")
+texture_over = ExtResource("3_i55gl")
+texture_progress = ExtResource("3_i55gl")
+tint_under = Color(0.44, 0.44, 0.44, 1)
+tint_over = Color(1, 1, 1, 0)
+tint_progress = Color(1, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_b11du")
+}

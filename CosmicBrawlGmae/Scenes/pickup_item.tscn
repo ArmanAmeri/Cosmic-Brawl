@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://cmk08rh8cv3ry"]
+
+[ext_resource type="Script" path="res://Scenes/pickup_item.gd" id="1_r4u1j"]
+[ext_resource type="Texture2D" uid="uid://b1b5uagwksqam" path="res://Sprites/NitroOrb.png" id="2_t2mja"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8fray"]
+radius = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_belf0"]
+radius = 7.0
+
+[node name="PickupItem" type="RigidBody2D"]
+collision_layer = 4
+collision_mask = 19
+gravity_scale = 0.2
+script = ExtResource("1_r4u1j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_8fray")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-0.4, 1.2)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2_t2mja")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 18
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_belf0")
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
