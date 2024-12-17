@@ -110,7 +110,7 @@ func _ready() -> void:
 	charge_bar.visible = false
 	charge_orb.visible = false
 	attack_coll.disabled = true
-	hp_bar.tint_progress = Color(255/ 255.0, 255/ 255.0, 255/ 255.0)
+	hp_bar.tint_progress = Color(173/ 255.0, 216/ 255.0, 230/ 255.0)
 	if player_id == 1:
 		attackArea.set_collision_layer_value(2, true)
 		attackArea.set_collision_layer_value(5, false)
@@ -129,7 +129,7 @@ func _ready() -> void:
 		player.set_collision_layer_value(5, true)
 	
 	if player_id == 2:
-		player_sprite.modulate = Color(0, 0, 1)
+		player_sprite.modulate = Color(0.862745, 0.0784314, 0.235294, 1)
 	
 	
 
@@ -169,7 +169,7 @@ func _physics_process(delta: float) -> void:
 		if orb_cooldown.is_stopped():
 			charge_orb.visible = false
 		speed = 100
-		gravity = 1
+		gravity = 0.7
 	
 	charge_orb.value = heavyCharge
 	
@@ -345,12 +345,12 @@ func collect_item(item_name: String, amount: int):
 		var fiftyfifty = randi()%2
 		if fiftyfifty == 0:
 			chanceOption = 0
-			onHit(Vector2(0,0), 0, 200)
+			onHit(Vector2(0,0), 0, 150)
 			$Timers/ChanceTimer.start()
 		elif fiftyfifty == 1:
 			chanceOption = 1
-			Globals.playerDamage = Globals.playerDamage * 2.5
-			Globals.playerHeavyDamage = Globals.playerHeavyDamage * 2.5
+			Globals.playerDamage = Globals.playerDamage * 2
+			Globals.playerHeavyDamage = Globals.playerHeavyDamage * 2
 			$Timers/ChanceTimer.start()
 
 

@@ -3,8 +3,8 @@ extends Node2D
 @onready var spawn_rate: Timer = $SpawnRate
 @onready var tile_map_layer: TileMapLayer = $"../TileMapLayer"
 
-@export var min_spawn_cooldown = 5
-@export var max_spawn_cooldown = 10
+@export var min_spawn_cooldown = 15
+@export var max_spawn_cooldown = 35
 
 var layer = 1 
 var spawn_positions: Array[Vector2] = [] 
